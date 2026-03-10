@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaCore Systems | Enterprise Software Solutions</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        },
+                        enterprise: {
+                            dark: '#0f172a',
+                            light: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for SPA transitions */
+        .page-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link.active {
+            color: #0284c7; /* primary-600 */
+            font-weight: 600;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #0284c7;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="navigate('home')">
+                    <i data-lucide="hexagon" class="h-8 w-8 text-primary-600 mr-2"></i>
+                    <span class="font-bold text-2xl text-enterprise-dark tracking-tight">NovaCore</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" onclick="navigate('home')" class="nav-link relative text-gray-600 hover:text-primary-600 transition-colors py-2 active">Home</a>
+                    <a href="#" onclick="navigate('about')" class="nav-link relative text-gray-600 hover:text-primary-600 transition-colors py-2">About Us</a>
+                    <a href="#" onclick="navigate('services')" class="nav-link relative text-gray-600 hover:text-primary-600 transition-colors py-2">Services</a>
+                    <a href="#" onclick="navigate('contact')" class="nav-link relative text-gray-600 hover:text-primary-600 transition-colors py-2">Contact</a>
+                    <button onclick="navigate('contact')" class="bg-primary-600 hover:bg-primary-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
+                        Request Demo
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#" onclick="navigate('home'); toggleMobileMenu()" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Home</a>
+                <a href="#" onclick="navigate('about'); toggleMobileMenu()" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">About Us</a>
+                <a href="#" onclick="navigate('services'); toggleMobileMenu()" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Services</a>
+                <a href="#" onclick="navigate('contact'); toggleMobileMenu()" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 rounded-md">Contact</a>
+                <button onclick="navigate('contact'); toggleMobileMenu()" class="w-full mt-4 bg-primary-600 text-white px-5 py-3 rounded-lg font-medium">Request Demo</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <section id="home" class="page-section active">
+            <!-- Hero Section -->
+            <div class="relative bg-enterprise-dark overflow-hidden">
+                <div class="absolute inset-0">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80" alt="Enterprise Technology" class="w-full h-full object-cover opacity-20" onerror="this.style.display='none'">
+                    <div class="absolute inset-0 bg-gradient-to-r from-enterprise-dark to-transparent"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24 pb-32 sm:pt-32 sm:pb-40">
+                    <div class="max-w-3xl">
+                        <span class="inline-block py-1 px-3 rounded-full bg-primary-900/50 border border-primary-500/30 text-primary-100 text-sm font-semibold tracking-wider mb-6">NEXT-GEN SOFTWARE</span>
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                            Empowering Enterprise <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-blue-200">Transformation</span>
+                        </h1>
+                        <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                            Scalable, secure, and intelligent software solutions designed to streamline your operations, drive sustainable growth, and future-proof your business.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigate('services')" class="bg-primary-600 hover:bg-primary-500 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all shadow-lg hover:shadow-primary-500/30 flex items-center justify-center">
+                                Explore Solutions
+                                <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
+                            </button>
+                            <button onclick="navigate('contact')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-lg font-semibold text-lg transition-all backdrop-blur-sm flex items-center justify-center">
+                                Contact Sales
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trusted By / Client Logos -->
+            <div class="bg-white py-10 border-b border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-6">Trusted by industry leaders worldwide</p>
+                    <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                        <div class="flex items-center space-x-2"><i data-lucide="globe" class="h-8 w-8 text-gray-800"></i><span class="text-xl font-bold text-gray-800">GlobalCorp</span></div>
+                        <div class="flex items-center space-x-2"><i data-lucide="cpu" class="h-8 w-8 text-gray-800"></i><span class="text-xl font-bold text-gray-800">TechSys</span></div>
+                        <div class="flex items-center space-x-2"><i data-lucide="trending-up" class="h-8 w-8 text-gray-800"></i><span class="text-xl font-bold text-gray-800">InnoVest</span></div>
+                        <div class="flex items-center space-x-2"><i data-lucide="database" class="h-8 w-8 text-gray-800"></i><span class="text-xl font-bold text-gray-800">DataFlow</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Value Props / Features -->
+            <div class="py-24 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Why Choose NovaCore?</h2>
+                        <p class="text-lg text-gray-600">We deliver mission-critical software architectures that adapt to your evolving business needs with zero compromise on security.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Feature 1 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="shield-check" class="h-7 w-7 text-primary-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Enterprise Security</h3>
+                            <p class="text-gray-600 leading-relaxed">Military-grade encryption, compliance-ready infrastructure, and continuous threat monitoring to protect your most valuable data assets.</p>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="zap" class="h-7 w-7 text-primary-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Seamless Integration</h3>
+                            <p class="text-gray-600 leading-relaxed">Our robust API-first architecture ensures smooth connectivity with your existing legacy systems and third-party applications.</p>
+                        </div>
+                        <!-- Feature 3 -->
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="w-14 h-14 bg-primary-50 rounded-xl flex items-center justify-center mb-6">
+                                <i data-lucide="bar-chart-3" class="h-7 w-7 text-primary-600"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Predictive Analytics</h3>
+                            <p class="text-gray-600 leading-relaxed">Leverage AI-driven insights to forecast trends, optimize resource allocation, and make data-backed decisions in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="bg-primary-900 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center justify-between bg-primary-800 rounded-3xl p-10 md:p-14 border border-primary-700 shadow-2xl relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-64 h-64 bg-primary-600 rounded-full blur-3xl opacity-20 translate-x-1/2 -translate-y-1/2"></div>
+                        <div class="max-w-2xl relative z-10 mb-8 md:mb-0">
+                            <h2 class="text-3xl font-bold text-white mb-4">Ready to accelerate your digital journey?</h2>
+                            <p class="text-primary-100 text-lg">Schedule a personalized consultation with our enterprise architects and discover how NovaCore can transform your business.</p>
+                        </div>
+                        <div class="relative z-10 flex-shrink-0">
+                            <button onclick="navigate('contact')" class="bg-white text-primary-900 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-colors shadow-lg w-full sm:w-auto">
+                                Schedule a Consultation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= ABOUT US PAGE ================= -->
+        <section id="about" class="page-section">
+            <!-- Header Banner -->
+            <div class="bg-gray-900 py-24 sm:py-32 relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <div class="h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">About NovaCore</h1>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto">Architecting the future of enterprise software, line by line, since 2012.</p>
+                </div>
+            </div>
+
+            <!-- Mission / Vision -->
+            <div class="py-20 sm:py-28 bg-white border-b border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                        <div>
+                            <h2 class="text-primary-600 font-semibold tracking-wider uppercase mb-3">Our Mission</h2>
+                            <h3 class="text-3xl font-bold text-gray-900 mb-6 leading-tight">To empower businesses through intelligent technology.</h3>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                At NovaCore, we believe that technology should be an enabler, not a bottleneck. Our mission is to build robust, scalable, and intuitive software platforms that solve complex enterprise challenges, allowing our clients to focus on what they do best—growing their business.
+                            </p>
+                            <div class="space-y-4 text-gray-700">
+                                <div class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-6 w-6 text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <p><strong>Innovation First:</strong> Continuous investment in R&D to stay ahead of the technology curve.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-6 w-6 text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <p><strong>Client Success:</strong> Measuring our achievements by the quantifiable success and ROI of our partners.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <i data-lucide="check-circle" class="h-6 w-6 text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <p><strong>Uncompromising Quality:</strong> Rigorous testing and compliance frameworks for mission-critical reliability.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-100 rounded-3xl p-1 relative">
+                            <!-- Placeholder visual -->
+                            <div class="bg-gradient-to-br from-primary-900 to-gray-800 rounded-2xl h-96 w-full flex items-center justify-center p-8 relative overflow-hidden">
+                                <div class="absolute w-64 h-64 bg-primary-500/20 blur-3xl top-10 left-10 rounded-full"></div>
+                                <div class="absolute w-40 h-40 bg-blue-400/20 blur-2xl bottom-10 right-10 rounded-full"></div>
+                                <div class="z-10 grid grid-cols-2 gap-4 opacity-50">
+                                    <div class="h-20 w-32 bg-white/10 rounded-lg border border-white/5 backdrop-blur-sm"></div>
+                                    <div class="h-20 w-32 bg-white/10 rounded-lg border border-white/5 backdrop-blur-sm"></div>
+                                    <div class="h-20 w-32 bg-white/10 rounded-lg border border-white/5 backdrop-blur-sm"></div>
+                                    <div class="h-20 w-32 bg-white/10 rounded-lg border border-white/5 backdrop-blur-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats/Numbers -->
+            <div class="bg-primary-50 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-x divide-primary-200">
+                        <div class="px-4">
+                            <p class="text-4xl font-extrabold text-primary-900 mb-2">10+</p>
+                            <p class="text-sm font-medium text-primary-600 uppercase tracking-wide">Years Experience</p>
+                        </div>
+                        <div class="px-4">
+                            <p class="text-4xl font-extrabold text-primary-900 mb-2">500+</p>
+                            <p class="text-sm font-medium text-primary-600 uppercase tracking-wide">Enterprise Clients</p>
+                        </div>
+                        <div class="px-4">
+                            <p class="text-4xl font-extrabold text-primary-900 mb-2">99.9%</p>
+                            <p class="text-sm font-medium text-primary-600 uppercase tracking-wide">System Uptime</p>
+                        </div>
+                        <div class="px-4">
+                            <p class="text-4xl font-extrabold text-primary-900 mb-2">24/7</p>
+                            <p class="text-sm font-medium text-primary-600 uppercase tracking-wide">Global Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership Team -->
+            <div class="py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Leadership Team</h2>
+                        <p class="text-lg text-gray-600">Guided by industry veterans with deep expertise in enterprise technology and digital transformation.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <!-- Team Member 1 -->
+                        <div class="text-center">
+                            <div class="mx-auto w-40 h-40 bg-gray-200 rounded-full mb-6 border-4 border-white shadow-lg flex items-center justify-center text-gray-400 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100"></div>
+                                <i data-lucide="user" class="h-16 w-16 relative z-10 text-gray-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Elena Rostova</h3>
+                            <p class="text-primary-600 font-medium mb-3">Chief Executive Officer</p>
+                            <p class="text-sm text-gray-500 px-4">Former VP of Engineering at a Fortune 500 tech firm, leading NovaCore's strategic vision since 2018.</p>
+                        </div>
+                        <!-- Team Member 2 -->
+                        <div class="text-center">
+                            <div class="mx-auto w-40 h-40 bg-gray-200 rounded-full mb-6 border-4 border-white shadow-lg flex items-center justify-center text-gray-400 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100"></div>
+                                <i data-lucide="user" class="h-16 w-16 relative z-10 text-gray-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Marcus Chen</h3>
+                            <p class="text-primary-600 font-medium mb-3">Chief Technology Officer</p>
+                            <p class="text-sm text-gray-500 px-4">Expert in distributed systems and cloud architecture. Leads R&D and core product development.</p>
+                        </div>
+                        <!-- Team Member 3 -->
+                        <div class="text-center">
+                            <div class="mx-auto w-40 h-40 bg-gray-200 rounded-full mb-6 border-4 border-white shadow-lg flex items-center justify-center text-gray-400 overflow-hidden relative">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-gray-300 to-gray-100"></div>
+                                <i data-lucide="user" class="h-16 w-16 relative z-10 text-gray-400"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900">Sarah Jenkins</h3>
+                            <p class="text-primary-600 font-medium mb-3">VP of Customer Success</p>
+                            <p class="text-sm text-gray-500 px-4">Dedicated to ensuring seamless implementations and maximizing ROI for every enterprise partner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= SERVICES PAGE ================= -->
+        <section id="services" class="page-section">
+             <!-- Header Banner -->
+             <div class="bg-gray-900 py-24 sm:py-32 relative overflow-hidden">
+                <div class="absolute inset-0 z-0 opacity-20">
+                    <div class="absolute right-0 bottom-0 w-[800px] h-[800px] bg-primary-600/30 rounded-full blur-[120px]"></div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">Enterprise Solutions</h1>
+                    <p class="text-xl text-gray-400 max-w-2xl mx-auto">Comprehensive software suites designed to modernize infrastructure, automate processes, and unlock data potential.</p>
+                </div>
+            </div>
+
+            <!-- Core Services List -->
+            <div class="py-20 sm:py-28 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+                    
+                    <!-- Service 1: NovaERP -->
+                    <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+                        <div class="w-full lg:w-1/2">
+                            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 h-80 flex flex-col justify-center relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full transition-transform group-hover:scale-110"></div>
+                                <i data-lucide="layers" class="h-16 w-16 text-primary-500 mb-6 relative z-10"></i>
+                                <h4 class="text-2xl font-bold text-gray-900 relative z-10">NovaERP™</h4>
+                                <p class="text-gray-500 mt-2 font-medium relative z-10">Enterprise Resource Planning</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Unified Operations Management</h3>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Break down organizational silos with a centralized platform that manages financials, supply chain, manufacturing, operations, reporting, and human resources. NovaERP provides real-time visibility across your entire global enterprise.
+                            </p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-primary-600 mr-3"></i> Automated financial reconciliation</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-primary-600 mr-3"></i> AI-powered supply chain forecasting</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-primary-600 mr-3"></i> Multi-currency & multi-entity support</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-primary-600 mr-3"></i> Custom compliance reporting</li>
+                            </ul>
+                            <button onclick="navigate('contact')" class="text-primary-600 font-semibold hover:text-primary-700 flex items-center transition-colors">
+                                Request ERP Fact Sheet <i data-lucide="arrow-right" class="h-4 w-4 ml-2 mt-0.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Cloud Infrastructure -->
+                    <div class="flex flex-col lg:flex-row-reverse gap-12 lg:gap-20 items-center">
+                        <div class="w-full lg:w-1/2">
+                            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 h-80 flex flex-col justify-center relative overflow-hidden group">
+                                <div class="absolute top-0 left-0 w-32 h-32 bg-indigo-50 rounded-br-full transition-transform group-hover:scale-110"></div>
+                                <i data-lucide="cloud" class="h-16 w-16 text-indigo-500 mb-6 relative z-10"></i>
+                                <h4 class="text-2xl font-bold text-gray-900 relative z-10">NovaCloud Architecture</h4>
+                                <p class="text-gray-500 mt-2 font-medium relative z-10">Cloud Infrastructure & Migration</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Secure, Scalable Cloud Deployment</h3>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Modernize your legacy systems with our secure hybrid and multi-cloud infrastructure solutions. We architect, migrate, and manage your cloud environments to ensure maximum availability, performance, and cost-efficiency.
+                            </p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-indigo-600 mr-3"></i> Zero-downtime migration strategies</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-indigo-600 mr-3"></i> Containerization & Kubernetes management</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-indigo-600 mr-3"></i> Disaster recovery & automated backups</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-indigo-600 mr-3"></i> Continuous Security Posture Management (CSPM)</li>
+                            </ul>
+                            <button onclick="navigate('contact')" class="text-indigo-600 font-semibold hover:text-indigo-700 flex items-center transition-colors">
+                                Consult Cloud Architects <i data-lucide="arrow-right" class="h-4 w-4 ml-2 mt-0.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Data & Analytics -->
+                    <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+                        <div class="w-full lg:w-1/2">
+                            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 h-80 flex flex-col justify-center relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full transition-transform group-hover:scale-110"></div>
+                                <i data-lucide="pie-chart" class="h-16 w-16 text-emerald-500 mb-6 relative z-10"></i>
+                                <h4 class="text-2xl font-bold text-gray-900 relative z-10">NovaIntelligence</h4>
+                                <p class="text-gray-500 mt-2 font-medium relative z-10">Data Analytics & Business Intelligence</p>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/2">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4">Turn Data into Strategic Assets</h3>
+                            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Aggregate data from across your enterprise into a single source of truth. Our advanced BI platform uses machine learning to uncover hidden patterns, visualize complex datasets, and deliver actionable insights directly to decision-makers.
+                            </p>
+                            <ul class="space-y-3 mb-8 text-gray-700">
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-emerald-600 mr-3"></i> Real-time interactive dashboards</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-emerald-600 mr-3"></i> NLP-powered querying capabilities</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-emerald-600 mr-3"></i> Predictive modeling & anomaly detection</li>
+                                <li class="flex items-center"><i data-lucide="check" class="h-5 w-5 text-emerald-600 mr-3"></i> Automated data governance & lineage</li>
+                            </ul>
+                            <button onclick="navigate('contact')" class="text-emerald-600 font-semibold hover:text-emerald-700 flex items-center transition-colors">
+                                View Demo Dashboards <i data-lucide="arrow-right" class="h-4 w-4 ml-2 mt-0.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="bg-white py-20 border-t border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-10">Built on Enterprise-Grade Technologies</h2>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">React / Angular</span>
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">Node.js / Python</span>
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">PostgreSQL / MongoDB</span>
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">AWS / Azure / GCP</span>
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">Docker / Kubernetes</span>
+                        <span class="px-5 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 font-medium">GraphQL / REST APIs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= CONTACT US PAGE ================= -->
+        <section id="contact" class="page-section">
+            <div class="bg-white">
+                <!-- Header -->
+                <div class="bg-primary-900 py-16 sm:py-24 text-center">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-4">Contact Sales & Support</h1>
+                        <p class="text-xl text-primary-200 max-w-2xl mx-auto">Get in touch with our team to discuss your enterprise requirements or request a comprehensive platform demo.</p>
+                    </div>
+                </div>
+
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        
+                        <!-- Contact Info -->
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
+                            <p class="text-lg text-gray-600 mb-10">Our enterprise specialists are ready to help you architect the perfect solution. Reach out via the form, or contact our global offices directly.</p>
+                            
+                            <div class="space-y-8">
+                                <div class="flex items-start">
+                                    <div class="bg-primary-50 p-3 rounded-lg mr-4">
+                                        <i data-lucide="map-pin" class="h-6 w-6 text-primary-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-900 mb-1">Global Headquarters</h4>
+                                        <p class="text-gray-600">100 Innovation Blvd, Suite 400<br>San Francisco, CA 94107<br>United States</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start">
+                                    <div class="bg-primary-50 p-3 rounded-lg mr-4">
+                                        <i data-lucide="phone" class="h-6 w-6 text-primary-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-900 mb-1">Phone</h4>
+                                        <p class="text-gray-600">Sales: +1 (800) 555-0199<br>Support: +1 (800) 555-0188</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start">
+                                    <div class="bg-primary-50 p-3 rounded-lg mr-4">
+                                        <i data-lucide="mail" class="h-6 w-6 text-primary-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-lg font-bold text-gray-900 mb-1">Email</h4>
+                                        <p class="text-gray-600">enterprise@novacore.example.com<br>support@novacore.example.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Form -->
+                        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 sm:p-10">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Request a Consultation</h3>
+                            <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                                    <div>
+                                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                        <input type="text" id="firstName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow" placeholder="Jane" required>
+                                    </div>
+                                    <div>
+                                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                        <input type="text" id="lastName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow" placeholder="Doe" required>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="workEmail" class="block text-sm font-medium text-gray-700 mb-2">Work Email</label>
+                                    <input type="email" id="workEmail" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow" placeholder="jane@company.com" required>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company Name</label>
+                                    <input type="text" id="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow" placeholder="Acme Corp" required>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="interest" class="block text-sm font-medium text-gray-700 mb-2">Primary Interest</label>
+                                    <select id="interest" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow bg-white">
+                                        <option>NovaERP Implementation</option>
+                                        <option>Cloud Migration Strategy</option>
+                                        <option>Data & Analytics Platform</option>
+                                        <option>General Inquiry / Demo</option>
+                                    </select>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message or Requirements</label>
+                                    <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-shadow" placeholder="Tell us about your current challenges..."></textarea>
+                                </div>
+                                <button type="submit" id="submit-btn" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-lg transition-colors shadow-md">
+                                    Send Message
+                                </button>
+                                
+                                <!-- Success Message (Hidden by default) -->
+                                <div id="form-success" class="hidden mt-4 p-4 bg-green-50 text-green-800 rounded-lg border border-green-200 flex items-center">
+                                    <i data-lucide="check-circle" class="h-5 w-5 mr-2"></i>
+                                    Thank you! Your request has been received. Our sales team will contact you shortly.
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- Brand -->
+                <div class="col-span-1 md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center cursor-pointer mb-6" onclick="navigate('home')">
+                        <i data-lucide="hexagon" class="h-8 w-8 text-primary-500 mr-2"></i>
+                        <span class="font-bold text-2xl text-white tracking-tight">NovaCore</span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Providing scalable, secure, and intelligent enterprise software solutions to modernize global businesses and drive sustainable growth.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="linkedin" class="h-5 w-5"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="twitter" class="h-5 w-5"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors"><i data-lucide="github" class="h-5 w-5"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Solutions</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" onclick="navigate('services')" class="hover:text-primary-400 transition-colors">NovaERP Framework</a></li>
+                        <li><a href="#" onclick="navigate('services')" class="hover:text-primary-400 transition-colors">Cloud Migration</a></li>
+                        <li><a href="#" onclick="navigate('services')" class="hover:text-primary-400 transition-colors">Business Intelligence</a></li>
+                        <li><a href="#" onclick="navigate('services')" class="hover:text-primary-400 transition-colors">Cybersecurity Suite</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Company</h4>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" onclick="navigate('about')" class="hover:text-primary-400 transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors">Investor Relations</a></li>
+                        <li><a href="#" onclick="navigate('contact')" class="hover:text-primary-400 transition-colors">Contact Sales</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 3 / Newsletter -->
+                <div>
+                    <h4 class="text-white font-semibold mb-6 uppercase tracking-wider text-sm">Stay Updated</h4>
+                    <p class="text-gray-400 text-sm mb-4">Subscribe to our enterprise technology newsletter.</p>
+                    <form class="flex" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Email address" class="w-full bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-l-md focus:outline-none focus:border-primary-500 text-sm">
+                        <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-md transition-colors">
+                            <i data-lucide="send" class="h-4 w-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 NovaCore Systems Inc. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-300">Terms of Service</a>
+                    <a href="#" class="hover:text-gray-300">Security Documentation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // SPA Navigation Logic
+        function navigate(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo(0, 0); // Scroll to top on navigation
+            }
+
+            // Update Desktop Nav Links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                // Check if the link's onclick contains the pageId
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Contact Form Handling (Simulation)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('form-success');
+            
+            // Loading state
+            btn.innerHTML = '<i data-lucide="loader-2" class="h-5 w-5 animate-spin mx-auto"></i>';
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+            lucide.createIcons();
+
+            // Simulate API Call delay
+            setTimeout(() => {
+                // Reset form
+                document.getElementById('contact-form').reset();
+                
+                // Reset button
+                btn.innerHTML = 'Send Message';
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                
+                // Show success message
+                successMsg.classList.remove('hidden');
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMsg.classList.add('hidden');
+                }, 5000);
+            }, 1500);
+        }
+
+        // Set initial state (home)
+        window.onload = () => {
+            navigate('home');
+        };
+    </script>
+</body>
+</html>
